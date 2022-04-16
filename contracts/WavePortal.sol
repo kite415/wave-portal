@@ -7,15 +7,17 @@ import "hardhat/console.sol";
 contract WavePortal {
 
     uint64 totalWaves;
+    mapping(address => uint64) public addressWaves;
 
     constructor() {
-        console.log("first contract, what's good");
+        console.log("Contract Executed");
     }
 
     // when wave() is called, it adds one wave to our total count
     function wave() public {
-        totalWaves += 1;
-        console.log("%s has waved", msg.sender);
+        addressWaves[msg.sender]++;
+        totalWaves++;
+        console.log("%s has waved %d times.", msg.sender, addressWaves[msg.sender]);
     }
 
     // gets us the total wave count
